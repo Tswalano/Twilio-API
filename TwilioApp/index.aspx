@@ -98,6 +98,7 @@
         $(document).ready(function () {
 
             var userOrder = [];
+            var orderNumber = 0;
 
             var message = '- NEW ORDER RECIEVED -' +
                             'Oredr Name: Oreder Name ' +
@@ -186,6 +187,7 @@
             //SEND AN ORDER TO TWILIO
             $("#btnOrder").click(function () {
                 var indx = 0;
+                var orderRef = Math.floor(Math.random() * 10000000) + 1;
 
                 $("ul.list-group > li").each(function (index) {
                     indx = index + 1;
@@ -196,13 +198,14 @@
                 $.ajax({
                     type: 'POST',
                     url: 'index.aspx/GetUserOrder',
-                    data: "{'menu':'" + userOrder + "', 'orderName':'" + $('.active h4').text() + "'}",
+                    data: "{'menu':'" + userOrder + "', 'orderRef':'" + orderRef + "', 'orderName':'" + $('.active h4').text() + "'}",
                     //data: "json=" + JSON.stringify(data),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'JSON',
 
                     success: function (data) {
-                        alert("Thank You! Your order was recieved");
+                        userOrder = [];
+                        alert("Thank You! Your order was recieved \n\n ORDER REFRENCE: " + orderRef);
                     }
                 });
 

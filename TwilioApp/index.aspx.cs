@@ -16,7 +16,7 @@ namespace TwilioApp
    
         [System.Web.Services.WebMethod(true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public static string GetUserOrder(string menu, string orderName)
+        public static string GetUserOrder(string menu, string orderName, string orderRef)
         {
 
             String data = "*NEW ORDER FROM TWILIO API*" + 
@@ -26,7 +26,10 @@ namespace TwilioApp
                 Environment.NewLine +
                 "*Ingridients*: ```" + menu +"```"+
                 Environment.NewLine +
-                Environment.NewLine +  DateTime.Now.ToString();
+                Environment.NewLine +
+                "*Order Reference*: ```" + orderRef + "```" +
+                Environment.NewLine + 
+                "*Order Time*: " + DateTime.Now.ToString();
 
             // Find your Account Sid and Token at twilio.com/console
             const string accountSid = "AC685df8af42aa8ef2ba4d004a00ac93df";
